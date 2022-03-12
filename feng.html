@@ -100,8 +100,8 @@
                     <h3>You :</h3>
                     <span id="playerScore">0</span>
                 </div>
-                <div class="show">
-                    <i class="rock"><img src="búa.png" style="height: 150px; width: 150px" /></i>
+                <div class="show user">
+                    <i class="rock"><img src="" style="height: 150px; width: 150px" /></i>
                 </div>
             </div>
             <div class="logo">
@@ -118,7 +118,7 @@
                 </div>
                 <div class="show computer">
                     <i class="scissor">
-                        <img src="Kéo.png" style="height: 150px; width: 150px" />
+                        <img src="" style="height: 150px; width: 150px" />
                     </i>
                 </div>
             </div>
@@ -127,13 +127,13 @@
         <!-- This selection div contains the buttons   -->
         <div class="selection">
             <button class="Rock" id="rock">
-                <img src="búa.png" style="height: 150px; width: 150px" />
+                <img src="rock.png" style="height: 150px; width: 150px" />
             </button>
             <button class="Paper" id="paper">
-                <img src="bao .png" style="height: 150px; width: 150px" />
+                <img src="paper.png" style="height: 150px; width: 150px" />
             </button>
-            <button class="Scissors" id="scissors">
-                <img src="Kéo.png" style="height: 150px; width: 150px" />
+            <button class="Scissor" id="scissor">
+                <img src="scissor.png" style="height: 150px; width: 150px" />
             </button>
         </div>
     </body>
@@ -146,7 +146,7 @@
         const showIcon = document.querySelector(".show i");
         const computerShowIcon = document.querySelector(".computer i");
         // The randomClass array below this contains the rock,paper, and scissor Icon from font-awesome.
-        const randomClasses = ["rock", "paper", "scissors"];
+        const randomClasses = ["rock", "paper", "scissor"];
         const text = document.getElementById("demo");
         const text2 = document.getElementById("demo2");
         // Game Functionality: Setting forEach function for the buttons.
@@ -154,11 +154,18 @@
             buttons.forEach((btn) => {
                 btn.addEventListener("click", (e) => {
                     // Random rock paper scissor for the computer and the player
-                    let clickedBtn = e.target.className;
+                    let clickedBtn = e.target.src;
                     // showIcon.className = clickedBtn;
                     let randomNum = Math.floor(Math.random() * randomClasses.length);
-                    computerShowIcon.className = randomClasses[randomNum];
-                    if (showIcon.className === computerShowIcon.className) {
+                    computerShowIcon.firstElementChild.src = randomClasses[randomNum] + ".png";
+                    showIcon.firstElementChild.src = btn.id + ".png";
+                    computerShowIcon.firstElementChild.className = randomClasses[randomNum];
+                    showIcon.firstElementChild.className = btn.id;
+                    console.log(computerShowIcon.firstElementChild.className);
+                    if (
+                        showIcon.firstElementChild.className ===
+                        computerShowIcon.firstElementChild.className
+                    ) {
                         pScore.innerHTML = pScore.innerHTML;
                         cScore.innerHTML = cScore.innerHTML;
                         text.innerHTML = "It's a Tie ! ";
@@ -168,8 +175,56 @@
                     }
                     // if it's not a Tie.
                     else if (
-                        showIcon.className === randomClasses[0] &&
-                        computerShowIcon.className === randomClasses[2]
+                        showIcon.firstElementChild.className === randomClasses[0] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[2]
+                    ) {
+                        playerScore++;
+                        pScore.innerHTML = playerScore;
+                        text.innerHTML = "It's a Win ! ";
+                        text.style.color = "rgb(1, 146, 1)";
+                        text2.innerHTML = text.innerHTML;
+                        text2.style.color = "rgb(1, 146, 1)";
+                        if (playerScore == 6) {
+                            alert(
+                                "Xin chúc mừng bạn đã trúng một phần quà từ FENG. Vui lòng chụp lại màn hình và gửi vào Facebook hoặc Instagram của FENG nhé!!. Congratulation, you got a gift from FENG. Please take the picture and send it to Facebook or Instagram of FENG"
+                            );
+                            location.reload();
+                        }
+                    } else if (
+                        showIcon.firstElementChild.className === randomClasses[0] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[1]
+                    ) {
+                        computerScore++;
+                        cScore.innerHTML = computerScore;
+                        text.innerHTML = "You Loosed ! ";
+                        text.style.color = "red";
+                        text2.innerHTML = text.innerHTML;
+                        text2.style.color = "red";
+                        if (computerScore == 6) {
+                            alert(
+                                "Rất tiếc bạn thua mất rồi, chơi lại để nhận được phần quà từ FENG nhé!!"
+                            );
+                            location.reload();
+                        }
+                    } else if (
+                        showIcon.firstElementChild.className === randomClasses[1] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[2]
+                    ) {
+                        cScore.innerHTML = computerScore;
+                        computerScore++;
+                        text.innerHTML = "You Loosed ! ";
+                        text.style.color = "red";
+                        text2.innerHTML = text.innerHTML;
+                        text2.style.color = "red";
+                        if (computerScore == 6) {
+                            alert(
+                                "Rất tiếc bạn thua mất rồi, chơi lại để nhận được phần quà từ FENG nhé!!"
+                            );
+                            location.reload();
+                        }
+                    } else if (
+                        showIcon.firstElementChild.className === randomClasses[1] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[0]
                     ) {
                         pScore.innerHTML = playerScore;
                         playerScore++;
@@ -184,8 +239,8 @@
                             location.reload();
                         }
                     } else if (
-                        showIcon.className === randomClasses[0] &&
-                        computerShowIcon.className === randomClasses[1]
+                        showIcon.firstElementChild.className === randomClasses[2] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[0]
                     ) {
                         cScore.innerHTML = computerScore;
                         computerScore++;
@@ -200,56 +255,8 @@
                             location.reload();
                         }
                     } else if (
-                        showIcon.className === randomClasses[1] &&
-                        computerShowIcon.className === randomClasses[2]
-                    ) {
-                        cScore.innerHTML = computerScore;
-                        computerScore++;
-                        text.innerHTML = "You Loosed ! ";
-                        text.style.color = "red";
-                        text2.innerHTML = text.innerHTML;
-                        text2.style.color = "red";
-                        if (computerScore == 6) {
-                            alert(
-                                "Rất tiếc bạn thua mất rồi, chơi lại để nhận được phần quà từ FENG nhé!!"
-                            );
-                            location.reload();
-                        }
-                    } else if (
-                        showIcon.className === randomClasses[1] &&
-                        computerShowIcon.className === randomClasses[0]
-                    ) {
-                        pScore.innerHTML = playerScore;
-                        playerScore++;
-                        text.innerHTML = "It's a Win ! ";
-                        text.style.color = "rgb(1, 146, 1)";
-                        text2.innerHTML = text.innerHTML;
-                        text2.style.color = "rgb(1, 146, 1)";
-                        if (playerScore == 6) {
-                            alert(
-                                "Xin chúc mừng bạn đã trúng một phần quà từ FENG. Vui lòng chụp lại màn hình và gửi vào Facebook hoặc Instagram của FENG nhé!!. Congratulation, you got a gift from FENG. Please take the picture and send it to Facebook or Instagram of FENG"
-                            );
-                            location.reload();
-                        }
-                    } else if (
-                        showIcon.className === randomClasses[2] &&
-                        computerShowIcon.className === randomClasses[0]
-                    ) {
-                        cScore.innerHTML = computerScore;
-                        computerScore++;
-                        text.innerHTML = "You Loosed ! ";
-                        text.style.color = "red";
-                        text2.innerHTML = text.innerHTML;
-                        text2.style.color = "red";
-                        if (computerScore == 6) {
-                            alert(
-                                "Rất tiếc bạn thua mất rồi, chơi lại để nhận được phần quà từ FENG nhé!!"
-                            );
-                            location.reload();
-                        }
-                    } else if (
-                        showIcon.className === randomClasses[2] &&
-                        computerShowIcon.className === randomClasses[1]
+                        showIcon.firstElementChild.className === randomClasses[2] &&
+                        computerShowIcon.firstElementChild.className === randomClasses[1]
                     ) {
                         pScore.innerHTML = playerScore;
                         playerScore++;
@@ -267,6 +274,7 @@
                 });
             });
         };
+
         // Calling the function.
         game();
     </script>
