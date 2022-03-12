@@ -138,8 +138,8 @@
         </div>
     </body>
     <script>
-        let computerScore = 1;
-        let playerScore = 1;
+        let computerScore = 0;
+        let playerScore = 0;
         const pScore = document.getElementById("playerScore");
         const cScore = document.getElementById("computerScore");
         const buttons = document.querySelectorAll(".selection button");
@@ -210,8 +210,9 @@
                         showIcon.firstElementChild.className === randomClasses[1] &&
                         computerShowIcon.firstElementChild.className === randomClasses[2]
                     ) {
-                        cScore.innerHTML = computerScore;
                         computerScore++;
+                        cScore.innerHTML = computerScore;
+
                         text.innerHTML = "You Loosed ! ";
                         text.style.color = "red";
                         text2.innerHTML = text.innerHTML;
@@ -226,8 +227,9 @@
                         showIcon.firstElementChild.className === randomClasses[1] &&
                         computerShowIcon.firstElementChild.className === randomClasses[0]
                     ) {
-                        pScore.innerHTML = playerScore;
                         playerScore++;
+                        pScore.innerHTML = playerScore;
+
                         text.innerHTML = "It's a Win ! ";
                         text.style.color = "rgb(1, 146, 1)";
                         text2.innerHTML = text.innerHTML;
@@ -242,8 +244,9 @@
                         showIcon.firstElementChild.className === randomClasses[2] &&
                         computerShowIcon.firstElementChild.className === randomClasses[0]
                     ) {
-                        cScore.innerHTML = computerScore;
                         computerScore++;
+                        cScore.innerHTML = computerScore;
+
                         text.innerHTML = "You Loosed ! ";
                         text.style.color = "red";
                         text2.innerHTML = text.innerHTML;
@@ -258,8 +261,8 @@
                         showIcon.firstElementChild.className === randomClasses[2] &&
                         computerShowIcon.firstElementChild.className === randomClasses[1]
                     ) {
-                        pScore.innerHTML = playerScore;
                         playerScore++;
+                        pScore.innerHTML = playerScore;
                         text.innerHTML = "It's a Win ! ";
                         text.style.color = "rgb(1, 146, 1)";
                         text2.innerHTML = text.innerHTML;
